@@ -2,3 +2,5 @@ flask
 pandas
 nltk
 matplotlib
+scikit-learn
+seaborn

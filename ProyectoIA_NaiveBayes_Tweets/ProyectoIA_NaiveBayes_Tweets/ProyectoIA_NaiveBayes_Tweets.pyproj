@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9e53f714-fc83-460b-ab15-f1910af0c965</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ProyectoIA_NaiveBayes_Tweets.py</StartupFile>
+    <StartupFile>service\app.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

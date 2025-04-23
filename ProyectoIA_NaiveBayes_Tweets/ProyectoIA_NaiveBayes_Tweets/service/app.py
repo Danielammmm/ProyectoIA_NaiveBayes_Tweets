@@ -30,24 +30,27 @@ def serve_script():
 
 # API para predecir sentimiento
 @app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     start_time = time.time()
-
     data = request.get_json()
+
     if 'text' not in data:
-        return jsonify({'error': 'El campo \"text\" es requerido'}), 400
+        return jsonify({'error': 'El campo "text" es requerido'}), 400
 
     raw_text = data['text']
     clean_text = preprocessing.clean_text(raw_text)
     bow_vector = preprocessing.text_to_bow(clean_text, vocab)
-    prediction = classifier.predict(bow_vector)
-
+    probs = classifier.predict_proba(bow_vector)
+    prediction = max(probs, key=probs.get)
     elapsed_time = round((time.time() - start_time) * 1000, 2)
 
     return jsonify({
         'sentiment': prediction,
-        'inference_time_ms': elapsed_time
+        'inference_time_ms': elapsed_time,
+        'probabilities': probs
     })
+
 
 if __name__ == '__main__':
     app.run(debug=True)
