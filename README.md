@@ -3,88 +3,114 @@
 Este proyecto consiste en una aplicación web que clasifica el sentimiento (positivo, negativo o neutro) de tweets usando el algoritmo Naïve Bayes implementado desde cero.
 
 El sistema está desarrollado bajo una arquitectura en capas y contiene una interfaz web funcional para ingresar el texto a analizar y visualizar el resultado.
+# Naïve Bayes Sentiment Classifier (Twitter-based)
+
+Este proyecto es un clasificador de sentimientos entrenado con los datasets **Sentiment140** y **Twitter Tweets Sentiment (Kaggle)**, utilizando un modelo **Naïve Bayes personalizado desde cero**.
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 
 ```
-ProyectoIA_NaiveBayes_Tweets/
-│
-├── data/                            ← Capa de datos: carga y limpieza del dataset
-│   ├── sentiment140_sample.csv     ← Subset del dataset original (opcional)
-│   ├── cleaned_data.pkl            ← Dataset limpio, serializado
-│   └── preprocessing.py           ← Funciones para limpiar y tokenizar texto
-│
-├── model/                           ← Capa del modelo Naïve Bayes
-│   ├── naive_bayes.py             ← Implementación desde cero del clasificador
-│   ├── metrics.py                 ← Cálculo de Precisión, Recall, F1 y matriz de confusión
-│   └── model.pkl                  ← Modelo entrenado y serializado (binario)
-│
-├── service/                         ← Motor de inferencia / Backend con Flask
-│   ├── inference.py               ← Funciones que usan el modelo para predecir
-│   └── app.py                     ← Aplicación principal Flask, expone el API
-│
-├── web/                             ← Interfaz web (Frontend)
-│   ├── static/
-│   │   └── styles.css           ← Estilos CSS para la web
-│   ├── templates/
-│   │   └── index.html           ← Vista principal con formulario
-│   └── script.js                 ← Lógica para enviar texto al backend y mostrar resultado
-│
-├── docs/                            ← Documentación y recursos de apoyo
-│   ├── arquitectura.drawio       ← Diagrama de arquitectura en capas
-│   ├── casos_uso.md              ← Casos de uso del sistema
-│   └── resultados.md             ← Métricas del modelo y ejemplos
-│
-├── .gitignore                       ← Archivos y carpetas a ignorar por Git
-├── README.md                        ← Descripción general, instrucciones y estructura
-├── requirements.txt                 ← Lista de dependencias del proyecto
-└── main.py                        ← Script principal para entrenar el modelo
+IA_Tweets/
+├── data/
+│   ├── training.1600000.processed.noemoticon.csv
+│   ├── Twitter_Tweets.csv
+│   ├── cleaned_train.pkl
+├── model/
+│   ├── naive_bayes.py
+│   └── model.pkl
+├── service/
+│   ├── app.py
+│   └── ... (archivos de la API Flask)
+├── web/
+│   ├── templates/index.html
+│   └── static/script.js, styles.css
+├── preprocessing.py
+├── fusionar_datasets.py
+├── main.py
+└── venv/
 ```
 
 ---
 
-## 📆 Tareas Generales (por Fases)
+## Instalación y ejecución
 
-### Fase 1: Configuración Inicial y Dataset
-- [ ] Crear repo y estructura de carpetas (**Daniela**)
-- [ ] Descargar y limpiar subset de `sentiment140` (**Nilssen**)
-- [ ] Crear entorno virtual e instalar dependencias (**Nilssen**)
+### A. Usando entorno virtual (recomendado)
 
-### Fase 2: Preprocesamiento de Datos
-- [ ] Implementar funciones de limpieza (`clean_text`) y tokenización (**Nilssen**)
-- [ ] Generar representación en bolsa de palabras (**Nilssen**)
+1. Crear y activar entorno virtual:
+```bash
+cd C:\IA_Tweets
+python -m venv venv
+venv\Scripts\activate
+```
 
-### Fase 3: Implementación del Modelo
-- [ ] Crear clase `NaiveBayesClassifier` (**Daniela**)
-- [ ] Entrenar y guardar modelo con `pickle` (**Daniela**)
-- [ ] Evaluar modelo: Precisión, Recall, F1, Confusión (**Daniela**)
+2. Instalar dependencias:
+```bash
+pip install pandas nltk matplotlib seaborn flask scikit-learn
+```
 
-### Fase 4: Motor de Inferencia (Flask)
-- [ ] Crear `app.py` con endpoint `/predict` (**Daniela**)
-- [ ] Integrar modelo y limpieza de entrada (**Ambos**)
-- [ ] Calcular tiempo de inferencia (**Daniela**)
+3. Descargar recursos de NLTK:
+```bash
+python
+```
+```python
+import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
+exit()
+```
 
-### Fase 5: Interfaz Web
-- [ ] Diseñar `index.html` con campo de texto (**Nilssen**)
-- [ ] Implementar `script.js` para conectar con backend (**Nilssen**)
-- [ ] Mostrar resultado y tiempo de respuesta (**Nilssen**)
+4. Preparar los datos:
+```bash
+python fusionar_datasets.py
+```
 
-### Fase 6: Documentación y Presentación
-- [ ] Crear informe PDF con diagramas y explicaciones (**Ambos**)
-- [ ] Completar `README.md` con instrucciones claras (**Daniela**)
-- [ ] Preparar capturas y video de demo final (**Nilssen**)
+5. Entrenar el modelo:
+```bash
+python main.py
+```
+
+6. Servir la API:
+```bash
+cd service
+python app.py
+```
+
+Abrir navegador en:
+```
+http://127.0.0.1:5000
+```
 
 ---
 
-## 🗓️ Cronograma sugerido (por semanas)
+### B. Sin entorno virtual (limpiar instalación anterior)
 
-| Semana | Actividades principales |
-|--------|--------------------------|
-| Semana 1 | Configuración inicial, descarga y limpieza del dataset, entorno virtual |
-| Semana 2 | Preprocesamiento, implementación de Naïve Bayes, pruebas básicas |
-| Semana 3 | Backend Flask, conexión con frontend, validaciones |
-| Semana 4 | Evaluación final del modelo, documentación, grabación del video, presentación |
+1. Eliminar entorno virtual si existe:
+```bash
+rmdir /s /q venv
+```
+
+2. Instalar dependencias directamente en el sistema (no recomendado):
+```bash
+pip install pandas nltk matplotlib seaborn flask scikit-learn
+```
+
+3. Ejecutar los mismos pasos del punto A desde el paso 3.
+
+---
+
+## Extras
+
+- El preprocesamiento incluye limpieza profunda, detección de lenguaje informal, bigramas y corrección de sarcasmo.
+- El clasificador Naïve Bayes ha sido optimizado para trabajar con texto corto, sarcasmo, y estilo real de redes sociales.
+
+---
+
+## Dataset combinados
+
+- [Sentiment140](http://help.sentiment140.com/for-students/)
+- [Twitter Tweets Kaggle](https://www.kaggle.com/datasets/yasserh/twitter-tweets-sentiment-dataset)
+
 
 
