@@ -70,6 +70,7 @@ python fusionar_datasets.py
 ```bash
 python main.py
 ```
+NOTA: main.py puede tardar entre 30 a 40 minutos en trenar
 
 6. Servir la API:
 ```bash
