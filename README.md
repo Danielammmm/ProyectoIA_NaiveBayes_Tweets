@@ -1,8 +1,3 @@
-# ProyectoIA_NaiveBayes_Tweets
-
-Este proyecto consiste en una aplicación web que clasifica el sentimiento (positivo, negativo o neutro) de tweets usando el algoritmo Naïve Bayes implementado desde cero.
-
-El sistema está desarrollado bajo una arquitectura en capas y contiene una interfaz web funcional para ingresar el texto a analizar y visualizar el resultado.
 # Naïve Bayes Sentiment Classifier (Twitter-based)
 
 Este proyecto es un clasificador de sentimientos entrenado con los datasets **Sentiment140** y **Twitter Tweets Sentiment (Kaggle)**, utilizando un modelo **Naïve Bayes personalizado desde cero**.
@@ -70,7 +65,7 @@ python fusionar_datasets.py
 ```bash
 python main.py
 ```
-NOTA: main.py puede tardar entre 30 a 40 minutos en trenar
+**Nota:** el entrenamiento puede tardar hasta 40 minutos por la cantidad de datos procesados.
 
 6. Servir la API:
 ```bash
@@ -101,6 +96,25 @@ pip install pandas nltk matplotlib seaborn flask scikit-learn
 
 ---
 
+## ¿Cuándo volver a ejecutar `main.py`?
+
+Se requiere volver a ejecutar `main.py` si:
+- Se modifican los datos (`cleaned_train.pkl`)
+- Se cambia el código del modelo (`naive_bayes.py`)
+- Se elimina o sobrescribe el archivo `model/model.pkl`
+
+No se requiere reentrenar si el modelo ya fue generado y el archivo `model.pkl` está presente sin cambios.
+
+Para levantar únicamente la API:
+```bash
+cd C:\IA_Tweets
+venv\Scripts\activate
+cd service
+python app.py
+```
+
+---
+
 ## Extras
 
 - El preprocesamiento incluye limpieza profunda, detección de lenguaje informal, bigramas y corrección de sarcasmo.
@@ -112,6 +126,3 @@ pip install pandas nltk matplotlib seaborn flask scikit-learn
 
 - [Sentiment140](http://help.sentiment140.com/for-students/)
 - [Twitter Tweets Kaggle](https://www.kaggle.com/datasets/yasserh/twitter-tweets-sentiment-dataset)
-
-
-
