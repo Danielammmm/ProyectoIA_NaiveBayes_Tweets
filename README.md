@@ -6,6 +6,10 @@ Este proyecto es un clasificador de sentimientos entrenado con los datasets **Se
 
 ## Estructura del proyecto
 
+Todas las carpetas relevantes del proyecto (data/, web/, service/, model/, etc.) se encuentran dentro de la ruta ProyectoIA\_NaiveBayes\_Tweets/ProyectoIA\_NaiveBayes\_Tweets/ProyectoIA\_NaiveBayes\_Tweets/ en el repositorio.
+
+Estas deben colocarse directamente dentro de la carpeta C:\IA\_Tweets para que el proyecto funcione correctamente.
+
 ```
 IA_Tweets/
 ├── data/
@@ -34,21 +38,31 @@ IA_Tweets/
 ### A. Usando entorno virtual (recomendado)
 
 1. Crear y activar entorno virtual:
+
 ```bash
 cd C:\IA_Tweets
 python -m venv venv
 venv\Scripts\activate
 ```
 
-2. Instalar dependencias:
+2. Instalar dependencias (opcionalmente usando requirements.txt):
+
+```bash
+pip install -r requirements.txt
+```
+
+Si no se cuenta con el archivo, se puede instalar manualmente:
+
 ```bash
 pip install pandas nltk matplotlib seaborn flask scikit-learn
 ```
 
 3. Descargar recursos de NLTK:
+
 ```bash
 python
 ```
+
 ```python
 import nltk
 nltk.download("punkt")
@@ -57,23 +71,28 @@ exit()
 ```
 
 4. Preparar los datos:
+
 ```bash
 python fusionar_datasets.py
 ```
 
 5. Entrenar el modelo:
+
 ```bash
 python main.py
 ```
+
 **Nota:** el entrenamiento puede tardar hasta 40 minutos por la cantidad de datos procesados.
 
 6. Servir la API:
+
 ```bash
 cd service
 python app.py
 ```
 
 Abrir navegador en:
+
 ```
 http://127.0.0.1:5000
 ```
@@ -83,11 +102,13 @@ http://127.0.0.1:5000
 ### B. Sin entorno virtual (limpiar instalación anterior)
 
 1. Eliminar entorno virtual si existe:
+
 ```bash
 rmdir /s /q venv
 ```
 
 2. Instalar dependencias directamente en el sistema (no recomendado):
+
 ```bash
 pip install pandas nltk matplotlib seaborn flask scikit-learn
 ```
@@ -99,6 +120,7 @@ pip install pandas nltk matplotlib seaborn flask scikit-learn
 ## ¿Cuándo volver a ejecutar `main.py`?
 
 Se requiere volver a ejecutar `main.py` si:
+
 - Se modifican los datos (`cleaned_train.pkl`)
 - Se cambia el código del modelo (`naive_bayes.py`)
 - Se elimina o sobrescribe el archivo `model/model.pkl`
@@ -106,6 +128,7 @@ Se requiere volver a ejecutar `main.py` si:
 No se requiere reentrenar si el modelo ya fue generado y el archivo `model.pkl` está presente sin cambios.
 
 Para levantar únicamente la API:
+
 ```bash
 cd C:\IA_Tweets
 venv\Scripts\activate
@@ -126,3 +149,4 @@ python app.py
 
 - [Sentiment140](http://help.sentiment140.com/for-students/)
 - [Twitter Tweets Kaggle](https://www.kaggle.com/datasets/yasserh/twitter-tweets-sentiment-dataset)
+
